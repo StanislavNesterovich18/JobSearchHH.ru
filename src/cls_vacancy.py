@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Self
+from typing import Any, Self
 
 import f  # type: ignore
 
 
 class BaseVacancy(ABC):
+    """Абстрактный класс для работы с вакансиями. """
     @classmethod
     @abstractmethod
     def cast_to_object_list(cls, hh_vacancies: list[dict]) -> list[Self]: ...
@@ -15,8 +16,15 @@ class BaseVacancy(ABC):
     @abstractmethod
     def __str__(self) -> str: ...
 
+    @abstractmethod
+    def to_dict(self) -> dict[str, Any]: ...
+
 
 class Vacancy(BaseVacancy):
+    """
+    Класс для работы со списком вакансий с сайта HeadHunter.
+    Обрабатываем черновой список, выбирая ключевую информацию
+    """
     __slots__ = (
         "id_vacancy",
         "name",
@@ -52,10 +60,25 @@ class Vacancy(BaseVacancy):
         return f"{self.id_vacancy} {self.name} {self.salary_from} {self.salary_to} {self.alternate_url}"
 
     def __str__(self) -> str:
+        """выводим ключевую информацию в ввиде строки"""
         return f"{self.id_vacancy} {self.name} {self.salary_from} {self.salary_to} {self.alternate_url}"
+
+    def to_dict(self) -> dict[str, Any]:
+        """Возвращаем ключевую информацию из списка"""
+        return {
+            "id_vacancy": self.id_vacancy,
+            "name": self.name,
+            "salary_from": self.salary_from,
+            "salary_to": self.salary_to,
+            "alternate_url": self.alternate_url,
+            "employer_id": self.employer_id,
+            "employer_name": self.employer_name,
+            "snippet_requirement": self.snippet_requirement,
+        }
 
     @classmethod
     def cast_to_object_list(cls, hh_vacancies: list[dict]) -> list[Self]:
+        """Возвращает список в заданом формате"""
         vacancies_list: list = []
         for hh_vacancy in hh_vacancies:
             salary_from: int = f.ichain(hh_vacancy, "salary", "from") or 0

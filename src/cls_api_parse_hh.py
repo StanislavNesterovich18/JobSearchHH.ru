@@ -5,13 +5,14 @@ from requests import Response
 
 
 class BaseHH(ABC):
+    """Абстрактный класс для работы с API сервиса с вакансиями. """
     @abstractmethod
     def load_vacancies(self, keyword: str) -> list[dict]: ...
 
 
 class HH(BaseHH):
     """
-    Класс для работы с API HeadHunter
+    Класс для работы с API HeadHunter. Получаем список в черновом вариантре
     """
 
     __BASE_URL: str = "https://api.hh.ru"
