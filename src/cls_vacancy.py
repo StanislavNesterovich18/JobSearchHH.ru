@@ -5,7 +5,8 @@ import f  # type: ignore
 
 
 class BaseVacancy(ABC):
-    """Абстрактный класс для работы с вакансиями. """
+    """Абстрактный класс для работы с вакансиями."""
+
     @classmethod
     @abstractmethod
     def cast_to_object_list(cls, hh_vacancies: list[dict]) -> list[Self]: ...
@@ -25,6 +26,7 @@ class Vacancy(BaseVacancy):
     Класс для работы со списком вакансий с сайта HeadHunter.
     Обрабатываем черновой список, выбирая ключевую информацию
     """
+
     __slots__ = (
         "id_vacancy",
         "name",

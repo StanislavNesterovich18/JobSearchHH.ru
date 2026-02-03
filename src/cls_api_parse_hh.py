@@ -5,7 +5,8 @@ from requests import Response
 
 
 class BaseHH(ABC):
-    """Абстрактный класс для работы с API сервиса с вакансиями. """
+    """Абстрактный класс для работы с API сервиса с вакансиями."""
+
     @abstractmethod
     def load_vacancies(self, keyword: str) -> list[dict]: ...
 
@@ -29,9 +30,3 @@ class HH(BaseHH):
             self.vacancies.extend(vacancies)
             params["page"] += 1
         return self.vacancies
-
-
-if __name__ == "__main__":
-    hh = HH()
-    hh.load_vacancies("python")
-    print(hh.vacancies)

@@ -5,9 +5,9 @@ from abc import ABC, abstractmethod
 from src.cls_vacancy import Vacancy
 
 
-class BaseJSONSaver(ABC):
+class BaseJsonSaver(ABC):
     """Абстрактный класс, который обязывает реализовать методы для добавления вакансий в файл,
-     получения данных из файла по указанным критериям и удаления информации о вакансиях.
+    получения данных из файла по указанным критериям и удаления информации о вакансиях.
     """
 
     @abstractmethod
@@ -23,8 +23,9 @@ class BaseJSONSaver(ABC):
     def delete_vacancy(self, vacancy: Vacancy) -> None: ...
 
 
-class JSONSaver(BaseJSONSaver):
+class JsonSaver(BaseJsonSaver):
     """Класс для сохранения информации о вакансиях в JSON-файл."""
+
     __slots__ = "__filename", "data_vacancy"
 
     def __init__(self, filename: str = "vacancies.json") -> None:
