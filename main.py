@@ -2,11 +2,11 @@ from src.cls_api_parse_hh import HH
 from src.cls_vacancy import Vacancy
 from src.user_interaction import (filter_vacancies, get_top_vacancies, get_vacancies_by_salary, print_vacancies,
                                   sort_vacancies)
-from src.working_files import JSONSaver
+from src.working_files import JsonSaver
 
 # Создание экземпляра класса для работы с API сайтов с вакансиями
 hh_api = HH()
-json_saver = JSONSaver()
+json_saver = JsonSaver()
 
 
 def user_interaction() -> None:
